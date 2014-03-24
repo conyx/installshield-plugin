@@ -28,10 +28,6 @@
       <id>repo.jenkins-ci.org</id>
       <url>http://repo.jenkins-ci.org/public/</url>
     </repository>
-    <repository>
-      <id>mylocal</id>
-      <url>file://${basedir}/lib</url>
-    </repository>
   </repositories>
 
   <pluginRepositories>
@@ -67,14 +63,14 @@
   <developers>
     <developer>
       <id>bambas</id>
-      <name>Tomáš Bambas</name>
+      <name>Tomas Bambas</name>
     </developer>
   </developers>
   
   <scm>
-    <connection>scm:git:git://github.com/jenkinsci/installshield-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:jenkinsci/installshield-plugin.git</developerConnection>
-    <url>http://github.com/jenkinsci/installshield-plugin</url>
+    <connection>scm:git:https://github.com/jenkinsci/installshield-plugin.git</connection>
+    <developerConnection>scm:git:https://github.com/jenkinsci/installshield-plugin.git</developerConnection>
+    <url>https://github.com/jenkinsci/installshield-plugin</url>
   </scm>
   
 </project>

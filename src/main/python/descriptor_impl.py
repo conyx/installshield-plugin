@@ -5,10 +5,10 @@ import hudson.util.FormValidation as FormValidation
 def descriptor_impl():
     extension.load();
 
-def configure(request, formData):
-    extension.setUseFrench(formData.getBoolean("useFrench"))
+def configure(request, form_data):
+    extension.french = form_data.getBoolean("french")
     extension.save();
-    return extension.superConfigure(request, formData)
+    return extension.superConfigure(request, form_data)
 
 def is_applicable(_class):
     return True

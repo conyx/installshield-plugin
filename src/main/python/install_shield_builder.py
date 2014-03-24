@@ -1,8 +1,8 @@
 #!/usr/bin/env jython
 
 def perform(build, launcher, listener):
-    if extension.getDescriptor().getUseFrench():
-        listener.getLogger().println("Bonjour, " + extension.getName() + "!")
+    if extension.getDescriptor().french:
+        listener.getLogger().println("Bonjour, " + extension.name + "!")
     else:
-        listener.getLogger().println("Hello, " + extension.getName() + "!")
+        listener.getLogger().println("Hello, " + extension.name + "!")
     return True
