@@ -1,15 +1,15 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-  <!--
-    This jelly script is used for per-project configuration.
-
-    See global.jelly for a general discussion about jelly script.
-  -->
-
-  <!--
-    Creates a text field that shows the value of the "name" property.
-    When submitted, it will be passed to the corresponding constructor parameter.
-  -->
-  <f:entry title="Name" field="name">
-    <f:textbox />
+  <f:entry title="InstallShield Version" field="builderVersion">
+    <select class="versions" name="builderVersion">
+      <j:forEach var="inst" items="${app.getDescriptorByName('jenkins.plugins.installshield.ISInstallation').getInstallations()}">
+        <f:option value="${inst.name}" selected="${inst.name==instance.builderVersion}">${inst.name}</f:option>
+      </j:forEach>
+    </select>
+  </f:entry>
+  <f:entry title="InstallShield Project File" field="projectFile">
+    <f:textbox/>
+  </f:entry>
+  <f:entry title="Command Line Arguments" field="cmdArgs">
+    <f:textbox/>
   </f:entry>
 </j:jelly>

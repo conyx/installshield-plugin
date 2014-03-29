@@ -11,24 +11,19 @@ import jenkins.python.descriptor.BuildStepDescriptorPW;
 
 public class InstallShieldBuilder extends BuilderPW {
 
-    public final String name;
+    public final String builderVersion;
+    public final String projectFile;
+    public final String cmdArgs;
 
     @DataBoundConstructor
-    public InstallShieldBuilder(String name) {
-        this.name = name;
+    public InstallShieldBuilder(String builderVersion, String projectFile, String cmdArgs) {
+        this.builderVersion = builderVersion;
+        this.projectFile = projectFile;
+        this.cmdArgs = cmdArgs;
     }
 
     @Extension
-    public static final class DescriptorImpl extends BuildStepDescriptorPW<Builder> {
-
-        public DescriptorImpl() {
-            execPython("descriptor_impl");
-        }
-
-        public boolean french;
+    public static final class ISBuilderDescr extends BuildStepDescriptorPW<Builder> {
         
-        public FormValidation doCheckName(@QueryParameter String value) {
-            return (FormValidation)execPython("do_check_name", value);
-        }
     }
 }
