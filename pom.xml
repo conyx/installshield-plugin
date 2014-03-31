@@ -9,7 +9,7 @@
 
   <groupId>org.jenkins-ci.plugins</groupId>
   <artifactId>installshield</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <name>InstallShield Plugin</name>
   <description>This plugin builds InstallShield projects.</description>
@@ -71,7 +71,7 @@
     <connection>scm:git:https://github.com/jenkinsci/installshield-plugin.git</connection>
     <developerConnection>scm:git:https://github.com/jenkinsci/installshield-plugin.git</developerConnection>
     <url>https://github.com/jenkinsci/installshield-plugin</url>
-    <tag>installshield-1.0.2</tag>
+    <tag>installshield-1.0</tag>
   </scm>
   
 </project>
