@@ -71,7 +71,6 @@
     <connection>scm:git:https://github.com/jenkinsci/installshield-plugin.git</connection>
     <developerConnection>scm:git:https://github.com/jenkinsci/installshield-plugin.git</developerConnection>
     <url>https://github.com/jenkinsci/installshield-plugin</url>
-    <tag>installshield-1.0</tag>
   </scm>
   
 </project>
