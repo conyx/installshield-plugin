@@ -1,10 +1,8 @@
 package jenkins.plugins.installshield;
 
 import hudson.Extension;
-import hudson.util.FormValidation;
 import hudson.tasks.Builder;
 import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.QueryParameter;
 
 import jenkins.python.expoint.BuilderPW;
 import jenkins.python.descriptor.BuildStepDescriptorPW;
