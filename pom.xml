@@ -9,7 +9,7 @@
 
   <groupId>org.jenkins-ci.plugins</groupId>
   <artifactId>installshield</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.3</version>
   <packaging>hpi</packaging>
   <name>InstallShield Plugin</name>
   <description>This plugin builds InstallShield projects.</description>
