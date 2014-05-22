@@ -1,11 +1,15 @@
 #!/usr/bin/env jython
 
-import os
 import subprocess
 
 import hudson.model.Computer as Computer
 import hudson.Util as Util
 import jenkins.model.Jenkins as Jenkins
+
+def install_shield_builder(version, project_file, cmd_args):
+    extension.builderVersion = version
+    extension.projectFile = project_file
+    extension.cmdArgs = cmd_args
 
 def find_project_file(build):
     module_root = build.getModuleRoot().list().toArray().tolist()
@@ -20,13 +24,13 @@ def perform(build, launcher, listener):
     logger = listener.getLogger()
     jenkins = Jenkins.getInstance()
     node = Computer.currentComputer().getNode()
-    env = build.getEnvironment(listener);
+    env = build.getEnvironment(listener)
     command = ""
     # get a InstallShield version name for this task/project
     is_builder_version = extension.builderVersion
     if is_builder_version == None or is_builder_version.strip() == "":
         listener.fatalError("InstallShield builder version for this project " +
-                            "is not specified!");
+                            "is not specified!")
         return False
     isi_descr_name = "jenkins.plugins.installshield.ISInstallation"
     isi_descr = jenkins.getDescriptorByName(isi_descr_name)
@@ -34,7 +38,7 @@ def perform(build, launcher, listener):
     installations = isi_descr.getInstallations()
     if installations == None:
         listener.fatalError("InstallShield builder versions are not set " +
-                            "(see global options)!");
+                            "(see global options)!")
         return False
     # choose the correct installation from the list
     is_installation = None
@@ -44,19 +48,19 @@ def perform(build, launcher, listener):
             break
     if is_installation == None:
         listener.fatalError("InstallShield builder version " +
-                            is_builder_version + " cannot be found!");
+                            is_builder_version + " cannot be found!")
         return False
     # translate the installation for the environment and the node
-    is_installation = is_installation.forNode(node, listener);
-    is_installation = is_installation.forEnvironment(env);
+    is_installation = is_installation.forNode(node, listener)
+    is_installation = is_installation.forEnvironment(env)
     # get path to the ISCmdBld.exe executable
     is_builder_path = is_installation.getHome()
     command += '"' + is_builder_path + '"'
     # add -p "projectfile.ism"
     project_file = extension.projectFile.strip()
     if project_file != "":
-        project_file = Util.replaceMacro(project_file, env);
-        project_file = Util.replaceMacro(project_file, build.getBuildVariables());
+        project_file = Util.replaceMacro(project_file, env)
+        project_file = Util.replaceMacro(project_file, build.getBuildVariables())
     else:
         project_file = find_project_file(build)
     if build.getModuleRoot().child(project_file).exists():
@@ -65,17 +69,17 @@ def perform(build, launcher, listener):
         project_file_path = build.getWorkspace().child(project_file)
     else:
         listener.fatalError("Project file " + project_file +
-                            " cannot be found in the workspace!");
+                            " cannot be found in the workspace!")
         return False
     command += ' -p "' + project_file_path.toString() + '"'
     # add other command line arguments
     arguments = extension.cmdArgs.strip()
-    arguments = Util.replaceMacro(arguments, env);
-    arguments = Util.replaceMacro(arguments, build.getBuildVariables());
-    command += ' ' + arguments + " & exit %%ERRORLEVEL%%"
+    arguments = Util.replaceMacro(arguments, env)
+    arguments = Util.replaceMacro(arguments, build.getBuildVariables())
+    command += ' ' + arguments
     # launch InstallShield builder (ISCmdBld.exe)
     logger.println("Executing command: " + command)
-    popen = subprocess.Popen(command, shell=True,
+    popen = subprocess.Popen(command, shell=False,
                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (stdoutdata, stderrdata) = popen.communicate()
     for line in stdoutdata.splitlines():

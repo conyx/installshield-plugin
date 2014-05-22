@@ -30,9 +30,7 @@ public final class ISInstallation extends ToolInstallationPW implements NodeSpec
 
     @Extension
     public static class ISInstallationDescr extends ToolDescriptorPW<ISInstallation> {
-        
         public ISInstallationDescr() {
-            super();
             execPython("is_installation_descr");
         }
     }

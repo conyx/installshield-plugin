@@ -9,15 +9,13 @@ import jenkins.python.descriptor.BuildStepDescriptorPW;
 
 public class InstallShieldBuilder extends BuilderPW {
 
-    public final String builderVersion;
-    public final String projectFile;
-    public final String cmdArgs;
+    public String builderVersion;
+    public String projectFile;
+    public String cmdArgs;
 
     @DataBoundConstructor
     public InstallShieldBuilder(String builderVersion, String projectFile, String cmdArgs) {
-        this.builderVersion = builderVersion;
-        this.projectFile = projectFile;
-        this.cmdArgs = cmdArgs;
+        execPython("install_shield_builder", builderVersion, projectFile, cmdArgs);
     }
 
     @Extension
